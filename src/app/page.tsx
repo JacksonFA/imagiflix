@@ -15,9 +15,9 @@ export default function Home() {
         sizes="100vw"
         className="-z-10 object-cover brightness-50"
       />
-      <main className="grid grid-cols-1 xl:grid-cols-3 pt-10">
+      <main className="grid grid-cols-1 pt-10 xl:grid-cols-3">
         <Image src={Logo} alt="Imagiflix Logo" className="ml-8" />
-        <section className="bg-zinc-900/90 xl:p-10 p-6 rounded-xl xl:w-[600px] xl:h-[800px] w-[310px] h-[500px] mx-auto mt-20 xl:mt-0">
+        <section className="mx-auto mt-20 h-[500px] w-[310px] rounded-xl bg-zinc-900/90 p-6 xl:mt-0 xl:h-[800px] xl:w-[600px] xl:p-10">
           <Login />
         </section>
       </main>
