@@ -3,6 +3,7 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   content: ['./src/components/**/*.{ts,tsx}', './src/app/**/*.{ts,tsx}'],
   theme: {
+    important: '#modal',
     // screens: {
     //   mobile: '390px',
     //   leptops: '1440px',

@@ -17,31 +17,31 @@ export function Login() {
 
   return (
     <>
-      <h3 className="text-zinc-50 font-black xl:text-5xl text-2xl">{type}</h3>
-      <form className="flex flex-col xl:gap-14 gap-6 mt-12">
+      <h3 className="text-2xl font-black text-zinc-50 xl:text-5xl">{type}</h3>
+      <form className="mt-12 flex flex-col gap-6 xl:gap-14">
         <input
-          className="xl:p-8 p-3 bg-zinc-500 rounded-xl placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          className="rounded-xl bg-zinc-500 p-3 placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 xl:p-8"
           type="email"
           placeholder="Email ou número"
         />
         <input
-          className="xl:p-8 p-3 bg-zinc-500 rounded-xl placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          className="rounded-xl bg-zinc-500 p-3 placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 xl:p-8"
           type="password"
           placeholder="Sua senha"
         />
         <button
-          className="xl:p-8 p-3 8 mt-4 bg-red-600 text-zinc-50 rounded-xl font-extrabold xl:text-3xl text-sm hover:bg-red-800"
+          className="8 mt-4 rounded-xl bg-red-600 p-3 text-sm font-extrabold text-zinc-50 hover:bg-red-800 xl:p-8 xl:text-3xl"
           type="button"
           onClick={() => router.push('/main')}
         >
           {type}
         </button>
-        <span className="xl:mt-8 mt-4 font-extralight xl:text-xl text-sm text-zinc-300 flex flex-col gap-4">
+        <span className="mt-4 flex flex-col gap-4 text-sm font-extralight text-zinc-300 xl:mt-8 xl:text-xl">
           {type === 'Entrar' ? (
             <p>
               Novo na Imagiflix?{' '}
               <a
-                className="text-indigo-500 font-bold ml-6 hover:text-indigo-700 hover:underline"
+                className="ml-6 font-bold text-indigo-500 hover:text-indigo-700 hover:underline"
                 href="#"
                 onClick={handleChangeToSignup}
               >
@@ -52,7 +52,7 @@ export function Login() {
             <p>
               Já possui uma conta?{' '}
               <a
-                className="text-indigo-500 font-bold ml-6 hover:text-indigo-700 hover:underline"
+                className="ml-6 font-bold text-indigo-500 hover:text-indigo-700 hover:underline"
                 href="#"
                 onClick={handleChangeToSignin}
               >
