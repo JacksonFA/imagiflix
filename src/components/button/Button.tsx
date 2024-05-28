@@ -1,4 +1,4 @@
-import React from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'
 
 const buttonVariants = tv({
@@ -17,9 +17,10 @@ const buttonVariants = tv({
 type ButtonVariants = VariantProps<typeof buttonVariants>
 
 type ButtonProps = {
-  icon: React.ReactNode
+  icon: ReactNode
   text: string
-} & ButtonVariants
+} & ButtonVariants &
+  ButtonHTMLAttributes<HTMLButtonElement>
 
 export function Button({ icon, text, color }: ButtonProps) {
   return (

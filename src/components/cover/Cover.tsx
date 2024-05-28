@@ -2,6 +2,7 @@ import Image, { StaticImageData } from 'next/image'
 import { useState } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
 import { Hover } from '../hover/Hover'
+import Link from 'next/link'
 
 type CoverProps = {
   alt: string
@@ -18,7 +19,7 @@ export function Cover({ alt, source }: CoverProps) {
   }
 
   return (
-    <>
+    <Link href="/details">
       <Image
         alt={alt}
         src={source}
@@ -27,6 +28,6 @@ export function Cover({ alt, source }: CoverProps) {
         onMouseOver={() => debounceTime(1000)}
       />
       <Hover onClose={onClose} isOpen={isOpen} />
-    </>
+    </Link>
   )
 }

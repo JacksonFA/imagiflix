@@ -24,7 +24,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
-    "tailwind-variants": "^0.2.1"
+    "tailwind-variants": "^0.2.1",
+    "video.js": "^8.12.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

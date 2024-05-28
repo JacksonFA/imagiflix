@@ -1,4 +1,6 @@
-import { useId, useState } from 'react'
+'use client'
+
+import { useState } from 'react'
 import Movie1 from '@/assets/movies/capa1.png'
 import Movie2 from '@/assets/movies/capa2.png'
 import Movie3 from '@/assets/movies/capa3.png'
@@ -10,7 +12,6 @@ type CategoryProps = {
 }
 
 export function Category({ title }: CategoryProps) {
-  // const id = useId()
   const [list, setList] = useState([
     { id: 1, alt: 'filme 1', source: Movie1 },
     { id: 2, alt: 'filme 2', source: Movie2 },

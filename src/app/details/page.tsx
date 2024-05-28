@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Movie from '@/assets/movies/capa6.png'
-import { CircleX, PlusCircle, ThumbsUp, Volume2 } from 'lucide-react'
+import { PlusCircle, ThumbsUp, Volume2 } from 'lucide-react'
 import { Button } from '@/components/button/Button'
 import { FaPlay } from 'react-icons/fa6'
+import { Close } from './Close'
+import Link from 'next/link'
 
 export default function Details() {
   return (
@@ -19,12 +21,12 @@ export default function Details() {
               className="-z-10"
             />
             <div className="flex h-80 flex-col justify-between px-4 pt-4 text-zinc-50">
-              <div className="flex items-center justify-end">
-                <CircleX size={48} />
-              </div>
+              <Close />
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Button icon={<FaPlay size={32} />} text="Assistir" color="primary" />
+                  <Link href="/player">
+                    <Button icon={<FaPlay size={32} />} text="Assistir" color="primary" />
+                  </Link>
                   <PlusCircle size={48} />
                   <ThumbsUp size={48} />
                 </div>
@@ -42,7 +44,7 @@ export default function Details() {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50">
                 A16
               </div>
-              <span className="text-xs font-semibold">
+              <span className="text-[10px] font-semibold">
                 Violência extrema, conteúdo sexual, drogas
               </span>
             </div>
@@ -53,8 +55,61 @@ export default function Details() {
               </div>
               <span className="text-sm font-bold">Top 5 em filmes hoje</span>
             </div>
+            <p className="max-w-64 text-[10px] font-medium">
+              Marlon e shawn wayans contribuem para alfinetar algunsdos maiores campeões de
+              bilheteria de terror adolescente Hollywood, nesta sátira mordaz
+            </p>
           </div>
-          <div></div>
+          <div className="flex max-w-52 flex-col gap-6 text-[10px]/none font-medium">
+            <p>
+              <span className="text-zinc-500">Elenco:</span> Anna Farias, jon Abrahams,Shannon
+              Elizabeth, mais
+            </p>
+            <p>
+              <span className="text-zinc-500">Gênero:</span> Sátira, filmes de comédia,filmes de
+              terros
+            </p>
+            <p>
+              <span className="text-zinc-500">Cenas e momentos:</span> Apimentados, irreverentes,
+              besteirol
+            </p>
+          </div>
+        </div>
+        <div className="p-4">
+          <p className="mb-6 text-xl font-black text-zinc-50">
+            <span className="text-zinc-500">Sobre: </span> Todo Mundo em Pânico
+          </p>
+          <div className="flex flex-col gap-2">
+            <p className="text-[10px] font-medium text-zinc-50">
+              <span className="text-zinc-500">Direção:</span> Keenen Ivory Wayans
+            </p>
+            <p className="text-[10px] font-medium text-zinc-50">
+              <span className="text-zinc-500">Elenco:</span> Keenen Ivory Wayans Keenen Ivory Wayans
+              Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen
+            </p>
+            <p className="text-[10px] font-medium text-zinc-50">
+              <span className="text-zinc-500">Roteiro:</span> Keenen Ivory Wayans Keenen Ivory
+              Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans
+              Keenen Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans
+              Keenen Ivory Wayans Keenen Ivory Wayans
+            </p>
+            <p className="text-[10px] font-medium text-zinc-50">
+              <span className="text-zinc-500">Gêneros:</span> Sátira, filmes de comédia, filmes de
+              terror, filmes de comédia e de fim de noite.
+            </p>
+            <p className="text-[10px] font-medium text-zinc-50">
+              <span className="text-zinc-500">Cenas e momentos:</span> Apimentados, Irreverentes,
+              Besteirol
+            </p>
+            <div className="flex items-center gap-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50">
+                A16
+              </div>
+              <p className="text-[10px] font-medium text-zinc-50">
+                violência extrema, conteúdo sexual, drogas não recomendado para menores de 16 anos
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
