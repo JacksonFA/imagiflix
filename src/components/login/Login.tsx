@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Input } from '../input/Input'
 
 export function Login() {
   const router = useRouter()
@@ -19,16 +20,8 @@ export function Login() {
     <>
       <h3 className="text-2xl font-black text-zinc-50 xl:text-5xl">{type}</h3>
       <form className="mt-12 flex flex-col gap-6 xl:gap-14">
-        <input
-          className="rounded-xl bg-zinc-500 p-3 placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 xl:p-8"
-          type="email"
-          placeholder="Email ou número"
-        />
-        <input
-          className="rounded-xl bg-zinc-500 p-3 placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 xl:p-8"
-          type="password"
-          placeholder="Sua senha"
-        />
+        <Input type="email" placeholder="Email ou número" />
+        <Input type="password" placeholder="Sua senha" />
         <button
           className="8 mt-4 rounded-xl bg-red-600 p-3 text-sm font-extrabold text-zinc-50 hover:bg-red-800 xl:p-8 xl:text-3xl"
           type="button"

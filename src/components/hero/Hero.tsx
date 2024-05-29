@@ -1,7 +1,9 @@
-import { Info, Play } from 'lucide-react'
+import { Info } from 'lucide-react'
 import { FaPlay } from 'react-icons/fa6'
 import Image from 'next/image'
 import BackgroundImg from '@/assets/background_hero.png'
+import { Button } from '../button/Button'
+import Link from 'next/link'
 
 export function Hero() {
   return (
@@ -40,14 +42,12 @@ export function Hero() {
                 quas eos, sint consectetur, perferendis perspiciatis!
               </p>
               <div className="mt-12 flex gap-8">
-                <button className="flex h-14 w-60 cursor-pointer items-center justify-center gap-4 rounded-xl bg-zinc-50 text-zinc-950 hover:bg-zinc-400">
-                  <FaPlay size="32px" />
-                  <span className="text-xs font-bold">Assistir</span>
-                </button>
-                <button className="flex h-14 w-60 cursor-pointer items-center justify-center gap-4 rounded-xl bg-zinc-50/30 text-zinc-50 hover:bg-zinc-50/10">
-                  <Info size="32px" />
-                  <span className="text-xs font-bold">Mais informações</span>
-                </button>
+                <Link href="/player">
+                  <Button icon={<FaPlay size={32} />} text="Assistir" color="primary" />
+                </Link>
+                <Button icon={<Info size="32px" />} text="Mais informações" color="secondary" />
+                {/* <button className="flex h-14 w-60 cursor-pointer items-center justify-center gap-4 rounded-xl bg-zinc-50/30 text-zinc-50 hover:bg-zinc-50/10">
+                </button> */}
               </div>
             </div>
           </div>
