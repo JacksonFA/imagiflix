@@ -3,10 +3,15 @@ import Movie from '@/assets/movies/capa6.png'
 import { PlusCircle, ThumbsUp, Volume2 } from 'lucide-react'
 import { Button } from '@/components/button/Button'
 import { FaPlay } from 'react-icons/fa6'
-import { Close } from './Close'
-import Link from 'next/link'
+import { Close } from '../Close'
 
-export default function Details() {
+type DetailsProps = {
+  params: {
+    movie: string
+  }
+}
+
+export default function Details({ params }: DetailsProps) {
   return (
     <main className="flex h-screen w-screen justify-center bg-zinc-950">
       <section className="w-full max-w-xl bg-zinc-800">
@@ -21,16 +26,21 @@ export default function Details() {
               className="-z-10"
             />
             <div className="flex h-80 flex-col justify-between px-4 pt-4 text-zinc-50">
-              <Close />
+              <div className="flex items-center justify-end">
+                <Close />
+              </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Link href="/player">
-                    <Button icon={<FaPlay size={32} />} text="Assistir" color="primary" />
-                  </Link>
-                  <PlusCircle size={48} />
-                  <ThumbsUp size={48} />
+                  <Button
+                    icon={<FaPlay size={32} />}
+                    text="Assistir"
+                    color="primary"
+                    action={`/player/${params.movie}`}
+                  />
+                  <PlusCircle size={48} className="cursor-pointer" />
+                  <ThumbsUp size={48} className="cursor-pointer" />
                 </div>
-                <Volume2 size={48} />
+                <Volume2 size={48} className="cursor-pointer" />
               </div>
             </div>
           </div>
@@ -77,7 +87,7 @@ export default function Details() {
         </div>
         <div className="p-4">
           <p className="mb-6 text-xl font-black text-zinc-50">
-            <span className="text-zinc-500">Sobre: </span> Todo Mundo em Pânico
+            <span className="text-zinc-500">Sobre: </span> {params.movie}
           </p>
           <div className="flex flex-col gap-2">
             <p className="text-[10px] font-medium text-zinc-50">

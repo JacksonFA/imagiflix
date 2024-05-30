@@ -1,12 +1,10 @@
 'use client'
 
 import { CircleX } from 'lucide-react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export function Close() {
-  return (
-    <Link href="/main" className="flex items-center justify-end">
-      <CircleX size={48} />
-    </Link>
-  )
+  const router = useRouter()
+
+  return <CircleX size={48} className="cursor-pointer" onClick={() => router.back()} />
 }

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { BellDot, Search } from 'lucide-react'
-import { FaCaretDown } from 'react-icons/fa6'
 import Logo from '@/assets/logo.png'
+import { User } from '../user/User'
 
 export function Header() {
   return (
@@ -33,16 +33,7 @@ export function Header() {
         <Search className="cursor-pointer" />
         <span className="cursor-pointer px-4">Infantil</span>
         <BellDot className="cursor-pointer" />
-        <div className="flex cursor-pointer items-center">
-          <Image
-            width={32}
-            height={32}
-            src="https://github.com/JacksonFA.png"
-            alt="User avatar"
-            className="rounded-lg"
-          />
-          <FaCaretDown />
-        </div>
+        <User />
       </div>
     </header>
   )
