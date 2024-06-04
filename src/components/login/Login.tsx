@@ -23,7 +23,7 @@ export function Login() {
         <Input type="email" placeholder="Email ou número" />
         <Input type="password" placeholder="Sua senha" />
         <button
-          className="8 mt-4 rounded-xl bg-red-600 p-3 text-sm font-extrabold text-zinc-50 hover:bg-red-800 xl:p-8 xl:text-3xl"
+          className="mt-4 rounded-xl bg-red-600 p-3 text-sm font-extrabold text-zinc-50 hover:bg-red-800 xl:p-6 xl:text-3xl"
           type="button"
           onClick={() => router.push('/main')}
         >

@@ -1,8 +1,8 @@
 import Image, { StaticImageData } from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
 import { Hover } from '../hover/Hover'
-import Link from 'next/link'
 
 type CoverProps = {
   alt: string
@@ -10,6 +10,7 @@ type CoverProps = {
 }
 
 export function Cover({ alt, source }: CoverProps) {
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | undefined>()
 
@@ -19,15 +20,16 @@ export function Cover({ alt, source }: CoverProps) {
   }
 
   return (
-    <Link href="/details">
+    <>
       <Image
         alt={alt}
         src={source}
         className="cursor-pointer rounded-md"
         onMouseOut={() => clearTimeout(timeoutId)}
         onMouseOver={() => debounceTime(1000)}
+        onClick={() => router.push(`/details/${alt}`)}
       />
-      <Hover onClose={onClose} isOpen={isOpen} />
-    </Link>
+      <Hover onClose={onClose} isOpen={isOpen} slug={alt} />
+    </>
   )
 }

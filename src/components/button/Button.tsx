@@ -1,4 +1,7 @@
+'use client'
+
 import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { useRouter } from 'next/navigation'
 import { VariantProps, tv } from 'tailwind-variants'
 
 const buttonVariants = tv({
@@ -19,12 +22,15 @@ type ButtonVariants = VariantProps<typeof buttonVariants>
 type ButtonProps = {
   icon: ReactNode
   text: string
+  action: string
 } & ButtonVariants &
   ButtonHTMLAttributes<HTMLButtonElement>
 
-export function Button({ icon, text, color }: ButtonProps) {
+export function Button({ icon, text, color, action }: ButtonProps) {
+  const router = useRouter()
+
   return (
-    <button className={buttonVariants({ color })}>
+    <button className={buttonVariants({ color })} onClick={() => router.push(action)}>
       {icon}
       <span className="text-xs font-bold">{text}</span>
     </button>

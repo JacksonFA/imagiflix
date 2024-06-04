@@ -1,16 +1,19 @@
+import { useRouter } from 'next/navigation'
 import { Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from '@chakra-ui/react'
 import { PlusCircle, ThumbsUp } from 'lucide-react'
 import { FaCaretDown, FaCirclePlay } from 'react-icons/fa6'
 import Image from 'next/image'
 import Movie5 from '@/assets/movies/capa5.png'
-import Link from 'next/link'
 
 interface HoverProps {
   onClose: () => void
   isOpen: boolean
+  slug: string
 }
 
-export function Hover({ onClose, isOpen }: HoverProps) {
+export function Hover({ onClose, isOpen, slug }: HoverProps) {
+  const router = useRouter()
+
   return (
     <Modal onClose={onClose} size="md" isOpen={isOpen}>
       <ModalOverlay />
@@ -22,15 +25,19 @@ export function Hover({ onClose, isOpen }: HoverProps) {
           <div className="flex flex-col gap-12 p-8">
             <div className="flex justify-between">
               <div className="flex gap-4">
-                <Link href="/player">
-                  <FaCirclePlay size={48} />
-                </Link>
-                <PlusCircle size={48} />
-                <ThumbsUp size={48} />
+                <FaCirclePlay
+                  size={48}
+                  className="cursor-pointer"
+                  onClick={() => router.push(`/player/${slug}`)}
+                />
+                <PlusCircle size={48} className="cursor-pointer" />
+                <ThumbsUp size={48} className="cursor-pointer" />
               </div>
-              <Link href="/details">
-                <FaCaretDown size={48} />
-              </Link>
+              <FaCaretDown
+                size={48}
+                className="cursor-pointer"
+                onClick={() => router.push(`/details/${slug}`)}
+              />
             </div>
             <div className="flex items-center gap-4">
               <span className="text-sm font-bold text-green-500">97% relevante</span>

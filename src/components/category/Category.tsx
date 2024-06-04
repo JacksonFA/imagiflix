@@ -13,10 +13,10 @@ type CategoryProps = {
 
 export function Category({ title }: CategoryProps) {
   const [list, setList] = useState([
-    { id: 1, alt: 'filme 1', source: Movie1 },
-    { id: 2, alt: 'filme 2', source: Movie2 },
-    { id: 3, alt: 'filme 3', source: Movie3 },
-    { id: 4, alt: 'filme 4', source: Movie4 },
+    { id: 1, alt: 'filme-1', source: Movie1 },
+    { id: 2, alt: 'filme-2', source: Movie2 },
+    { id: 3, alt: 'filme-3', source: Movie3 },
+    { id: 4, alt: 'filme-4', source: Movie4 },
   ])
   return (
     <section className="sticky">
