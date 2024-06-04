@@ -19,7 +19,7 @@ export function Login() {
   return (
     <>
       <h3 className="text-2xl font-black text-zinc-50 xl:text-5xl">{type}</h3>
-      <form className="mt-12 flex flex-col gap-6 xl:gap-14">
+      <form className="mt-12 flex flex-col gap-6">
         <Input type="email" placeholder="Email ou número" />
         <Input type="password" placeholder="Sua senha" />
         <button
