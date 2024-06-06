@@ -15,12 +15,15 @@ const inputVariants = tv({
 
 type InputProps = VariantProps<typeof inputVariants> & InputHTMLAttributes<HTMLInputElement>
 
-export function Input({ color, ...props }: InputProps) {
+export function Input({ color, placeholder, ...props }: InputProps) {
   const id = useId()
 
   return (
     <>
-      <input id={id} className={inputVariants({ color })} {...props} />
+      <label className="sr-only text-zinc-50 xl:not-sr-only" htmlFor={id}>
+        {placeholder}
+      </label>
+      <input id={id} className={inputVariants({ color })} placeholder={placeholder} {...props} />
     </>
   )
 }

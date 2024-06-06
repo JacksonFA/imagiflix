@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { twMerge } from 'tailwind-merge'
 import Movie from '@/assets/movies/capa6.png'
 import { PlusCircle, ThumbsUp, Volume2 } from 'lucide-react'
 import { Button } from '@/components/button/Button'
@@ -59,7 +60,13 @@ export default function Details({ params }: DetailsProps) {
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 flex-col items-center justify-center rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50">
+              <div
+                className={twMerge(
+                  'flex h-10 w-10 flex-col items-center justify-center',
+                  'rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50',
+                  params.movie === 'filme-1' && 'bg-green-800'
+                )}
+              >
                 <p>TOP</p>
                 <p>10</p>
               </div>
