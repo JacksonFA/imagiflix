@@ -1,4 +1,4 @@
-import { FormHTMLAttributes } from 'react'
+import { Dispatch, FormHTMLAttributes, SetStateAction } from 'react'
 import { useRouter } from 'next/navigation'
 import { UseToastOptions, useToast } from '@chakra-ui/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -7,6 +7,7 @@ import { LoginType } from '../login/Login'
 
 type FormProps = {
   loginType: LoginType
+  setLoginType: Dispatch<SetStateAction<LoginType>>
 } & FormHTMLAttributes<HTMLFormElement>
 
 export type Inputs = {
@@ -32,7 +33,7 @@ const ToastConfig: UseToastOptions = {
   position: 'top-right',
 }
 
-export function Form({ loginType, ...props }: FormProps) {
+export function Form({ loginType, setLoginType, ...props }: FormProps) {
   const router = useRouter()
   const toast = useToast()
   const {
@@ -42,26 +43,25 @@ export function Form({ loginType, ...props }: FormProps) {
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (loginType === LoginType.SINGUP) return await signup(data)
-    await signin(data.email)
+    await signin(data.email, data.password)
   }
 
-  async function signin(email: string) {
+  async function signin(email: string, password: string) {
     try {
-      const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logins`, {
+      const response = await fetch('/api/signin', {
+        body: JSON.stringify({ email, password }),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
         },
-        method: 'GET',
+        method: 'POST',
       })
-      const { data } = await result.json()
-      const users: UserProps[] = data
-      const foundUser = users.find((user) => user.attributes.email == email)
-      if (!foundUser) {
-        return alert('Email inválido.')
+      if (!response.ok) {
+        const { message } = await response.json()
+        toast({ ...ToastConfig, description: message })
       }
-      router.push('/main')
-    } catch (error) {
+      // router.push('/main')
+    } catch (error: any) {
+      console.log(error.message)
       toast(ToastConfig)
     }
   }
@@ -69,23 +69,26 @@ export function Form({ loginType, ...props }: FormProps) {
   async function signup({ name, email, password }: Inputs) {
     try {
       const body = {
-        data: {
-          name,
-          email,
-          password,
-        },
+        name,
+        email,
+        password,
       }
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logins`, {
+      const response = await fetch('/api/signup', {
         body: JSON.stringify(body),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
         },
         method: 'POST',
       })
-      const result = await response.json()
-      if (!result.data) return alert('Email inválido')
-      router.push('/main')
+      const { message } = await response.json()
+      toast({
+        ...ToastConfig,
+        title: 'Criação de conta',
+        description: message,
+        status: 'success',
+      })
+      setLoginType(LoginType.SIGNIN)
+      // router.push('/main')
     } catch (error) {
       toast({
         ...ToastConfig,

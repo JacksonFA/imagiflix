@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Form } from '../form/Form'
 
 export enum LoginType {
@@ -11,18 +11,10 @@ export enum LoginType {
 export function Login() {
   const [type, setType] = useState<LoginType>(LoginType.SIGNIN)
 
-  useEffect(() => {
-    ;(async () => {
-      const response = await fetch('/api')
-      const result = await response.json()
-      console.log(result)
-    })()
-  }, [])
-
   return (
     <>
       <h3 className="text-2xl font-black text-zinc-50 xl:text-5xl">{type}</h3>
-      <Form loginType={type} />
+      <Form loginType={type} setLoginType={setType} />
       <span className="mt-4 flex flex-col gap-4 text-sm font-extralight text-zinc-300 xl:mt-8 xl:text-xl">
         {type === LoginType.SIGNIN ? (
           <>
