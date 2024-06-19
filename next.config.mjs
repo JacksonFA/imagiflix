@@ -9,7 +9,7 @@ const nextConfig = {
         pathname: '/JacksonFA.png',
       },
     ],
-  }
+  },
 }
 
 export default nextConfig
