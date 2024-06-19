@@ -55,11 +55,12 @@ export function Form({ loginType, setLoginType, ...props }: FormProps) {
         },
         method: 'POST',
       })
+      const result = await response.json()
       if (!response.ok) {
-        const { message } = await response.json()
-        toast({ ...ToastConfig, description: message })
+        toast({ ...ToastConfig, description: result.message })
       }
-      // router.push('/main')
+      localStorage.setItem('user', JSON.stringify({ name: result.name, email }))
+      router.push('/main')
     } catch (error: any) {
       console.log(error.message)
       toast(ToastConfig)
@@ -88,7 +89,6 @@ export function Form({ loginType, setLoginType, ...props }: FormProps) {
         status: 'success',
       })
       setLoginType(LoginType.SIGNIN)
-      // router.push('/main')
     } catch (error) {
       toast({
         ...ToastConfig,

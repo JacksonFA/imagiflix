@@ -8,6 +8,11 @@ import { FaCaretDown } from 'react-icons/fa6'
 export function User() {
   const router = useRouter()
 
+  function logout() {
+    localStorage.removeItem('user')
+    router.push('/')
+  }
+
   return (
     <Menu isLazy>
       <MenuButton>
@@ -23,7 +28,7 @@ export function User() {
         </div>
       </MenuButton>
       <MenuList bgColor="black">
-        <MenuItem bgColor="black" onClick={() => router.push('/')}>
+        <MenuItem bgColor="black" onClick={logout}>
           Logout
         </MenuItem>
       </MenuList>

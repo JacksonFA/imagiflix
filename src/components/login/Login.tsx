@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from '../form/Form'
+import { useRouter } from 'next/navigation'
 
 export enum LoginType {
   SIGNIN = 'Entrar',
@@ -9,7 +10,14 @@ export enum LoginType {
 }
 
 export function Login() {
+  const router = useRouter()
   const [type, setType] = useState<LoginType>(LoginType.SIGNIN)
+
+  useEffect(() => {
+    const userLogged = localStorage.getItem('user')
+    if (!userLogged) return
+    router.replace('/main')
+  }, [])
 
   return (
     <>
