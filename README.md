@@ -1,4 +1,4 @@
-![screenshot]('./.github/assets/screenshot.png')
+![screenshot](./.github/assets/screenshot.png)
 
 # IMAGIFLIX
 
