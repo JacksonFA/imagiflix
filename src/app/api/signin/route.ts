@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { LoginInputData } from '../@types/user.dto'
+import { LoginInputData } from '../../../types/user.dto'
 import { users } from '../data/user'
 
 export async function POST(req: Request) {

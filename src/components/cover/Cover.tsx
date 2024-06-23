@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
@@ -6,7 +6,7 @@ import { Hover } from '../hover/Hover'
 
 type CoverProps = {
   alt: string
-  source: StaticImageData
+  source: string
 }
 
 export function Cover({ alt, source }: CoverProps) {

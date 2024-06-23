@@ -1,23 +1,39 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Movie1 from '@/assets/movies/capa1.png'
 import Movie2 from '@/assets/movies/capa2.png'
 import Movie3 from '@/assets/movies/capa3.png'
 import Movie4 from '@/assets/movies/capa4.png'
 import { Cover } from '../cover/Cover'
+import { Movie } from '@/types/movie'
 
 type CategoryProps = {
   title: string
 }
 
+type ListProps = {
+  id: number
+  alt: string
+  source: string
+}
+
 export function Category({ title }: CategoryProps) {
-  const [list, setList] = useState([
-    { id: 1, alt: 'filme-1', source: Movie1 },
-    { id: 2, alt: 'filme-2', source: Movie2 },
-    { id: 3, alt: 'filme-3', source: Movie3 },
-    { id: 4, alt: 'filme-4', source: Movie4 },
-  ])
+  const [list, setList] = useState<ListProps[]>([])
+
+  useEffect(() => {
+    ;(async () => {
+      const response = await fetch('/api/tmdb/popular')
+      const results: Movie[] = await response.json()
+      const movies = results.map((result) => ({
+        id: result.id,
+        alt: result.title,
+        source: result.poster_path,
+      }))
+      // setList(movies)
+    })()
+  }, [])
+
   return (
     <section className="sticky">
       <p className="text-xl font-bold text-zinc-50">{title}</p>
