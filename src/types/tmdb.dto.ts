@@ -1,4 +1,4 @@
-import { Movie } from './movie'
+import { Movie, MovieDetails } from './movie'
 
 export type TMDBResponse<ResultType> = {
   page: number
@@ -8,3 +8,5 @@ export type TMDBResponse<ResultType> = {
 }
 
 export type PopularResponse = TMDBResponse<Movie>
+
+export type MovieResponse = MovieDetails
