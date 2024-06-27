@@ -25,7 +25,7 @@ export function Cover({ item, type }: CoverProps) {
   return (
     <>
       <Image
-        alt={item.title}
+        alt={item.title!}
         src={item.poster_path}
         width={250}
         height={400}
@@ -40,7 +40,7 @@ export function Cover({ item, type }: CoverProps) {
         id={item.id}
         type={type}
         backdrop_path={item.backdrop_path}
-        release_date={item.release_date}
+        release_date={item.release_date!}
       />
     </>
   )
