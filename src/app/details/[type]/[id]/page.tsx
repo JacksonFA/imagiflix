@@ -16,7 +16,7 @@ type DetailsProps = {
 }
 
 async function getMovieDetails({ params }: DetailsProps): Promise<MovieDetails> {
-  const response = await fetch(`${NEXT_API_URL}/tmdb/${params.type}/details/${params.id}`, {
+  const response = await fetch(`${NEXT_API_URL}/api/tmdb/${params.type}/details/${params.id}`, {
     cache: 'no-cache',
   })
   return response.json()
