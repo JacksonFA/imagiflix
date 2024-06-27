@@ -44,8 +44,8 @@ async function getHeroContent(): Promise<Movie & { type: 'tv' | 'movie' }> {
 }
 
 export default async function Main() {
-  if (!process.env.NEXT_PUBLIC_API_URL) {
-    throw new Error('NEXT_PUBLIC_API_URL is not defined')
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return
   }
   const [popularMovies, popularSeries, topRatedMovies, topRatedSeries, heroContent] =
     await Promise.all([

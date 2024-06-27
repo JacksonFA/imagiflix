@@ -25,8 +25,8 @@ async function getMovieDetails({ params }: DetailsProps): Promise<MovieDetails> 
 }
 
 export default async function Details({ params }: DetailsProps) {
-  if (!process.env.NEXT_PUBLIC_API_URL) {
-    throw new Error('NEXT_PUBLIC_API_URL is not defined')
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return
   }
   const movieDetails = await getMovieDetails({ params })
   return (
