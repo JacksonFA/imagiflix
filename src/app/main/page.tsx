@@ -5,28 +5,28 @@ import { Movie } from '@/types/movie'
 import { randomInt } from 'node:crypto'
 
 async function getPopularMovies(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_API_URL}/tmdb/movie/popular', {
+  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/movie/popular', {
     cache: 'no-cache',
   })
   return response.json()
 }
 
 async function getPopularSeries(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_API_URL}/tmdb/tv/popular', {
+  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/tv/popular', {
     cache: 'no-cache',
   })
   return response.json()
 }
 
 async function getTopRatedMovies(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_API_URL}/tmdb/movie/top_rated', {
+  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/movie/top_rated', {
     cache: 'no-cache',
   })
   return response.json()
 }
 
 async function getTopRatedSeries(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_API_URL}/tmdb/tv/top_rated', {
+  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/tv/top_rated', {
     cache: 'no-cache',
   })
   return response.json()
@@ -35,7 +35,7 @@ async function getTopRatedSeries(): Promise<Movie[]> {
 async function getHeroContent(): Promise<Movie & { type: 'tv' | 'movie' }> {
   const types = ['movie', 'tv']
   const type = types[randomInt(2)]
-  const response = await fetch(`${process.env.NEXT_API_URL}/tmdb/${type}/popular`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tmdb/${type}/popular`, {
     cache: 'no-cache',
   })
   const results = await response.json()
