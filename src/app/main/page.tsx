@@ -3,30 +3,31 @@ import { Hero } from '@/components/hero/Hero'
 import { Category } from '@/components/category/Category'
 import { Movie } from '@/types/movie'
 import { randomInt } from 'node:crypto'
+import { NEXT_API_URL } from '@/constants/constants'
 
 async function getPopularMovies(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/movie/popular', {
+  const response = await fetch(`${NEXT_API_URL}/tmdb/movie/popular`, {
     cache: 'no-cache',
   })
   return response.json()
 }
 
 async function getPopularSeries(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/tv/popular', {
+  const response = await fetch(`${NEXT_API_URL}/tmdb/tv/popular`, {
     cache: 'no-cache',
   })
   return response.json()
 }
 
 async function getTopRatedMovies(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/movie/top_rated', {
+  const response = await fetch(`${NEXT_API_URL}/tmdb/movie/top_rated`, {
     cache: 'no-cache',
   })
   return response.json()
 }
 
 async function getTopRatedSeries(): Promise<Movie[]> {
-  const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/tmdb/tv/top_rated', {
+  const response = await fetch(`${NEXT_API_URL}/tmdb/tv/top_rated`, {
     cache: 'no-cache',
   })
   return response.json()
@@ -35,7 +36,7 @@ async function getTopRatedSeries(): Promise<Movie[]> {
 async function getHeroContent(): Promise<Movie & { type: 'tv' | 'movie' }> {
   const types = ['movie', 'tv']
   const type = types[randomInt(2)]
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tmdb/${type}/popular`, {
+  const response = await fetch(`${NEXT_API_URL}/tmdb/${type}/popular`, {
     cache: 'no-cache',
   })
   const results = await response.json()
@@ -44,8 +45,8 @@ async function getHeroContent(): Promise<Movie & { type: 'tv' | 'movie' }> {
 }
 
 export default async function Main() {
-  if (!process.env.NEXT_PUBLIC_API_URL) {
-    throw new Error('NEXT_PUBLIC_API_URL is not defined')
+  if (!NEXT_API_URL) {
+    return null
   }
   const [popularMovies, popularSeries, topRatedMovies, topRatedSeries, heroContent] =
     await Promise.all([

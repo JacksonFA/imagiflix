@@ -6,6 +6,7 @@ import { Button } from '@/components/button/Button'
 import { FaPlay } from 'react-icons/fa6'
 import { Close } from '../../Close'
 import { MovieDetails } from '@/types/movie'
+import { NEXT_API_URL } from '@/constants/constants'
 
 type DetailsProps = {
   params: {
@@ -15,18 +16,15 @@ type DetailsProps = {
 }
 
 async function getMovieDetails({ params }: DetailsProps): Promise<MovieDetails> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/tmdb/${params.type}/details/${params.id}`,
-    {
-      cache: 'no-cache',
-    }
-  )
+  const response = await fetch(`${NEXT_API_URL}/tmdb/${params.type}/details/${params.id}`, {
+    cache: 'no-cache',
+  })
   return response.json()
 }
 
 export default async function Details({ params }: DetailsProps) {
-  if (!process.env.NEXT_PUBLIC_API_URL) {
-    throw new Error('NEXT_PUBLIC_API_URL is not defined')
+  if (!NEXT_API_URL) {
+    return null
   }
   const movieDetails = await getMovieDetails({ params })
   return (
