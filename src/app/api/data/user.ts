@@ -1,4 +1,4 @@
-import { NewUserInputData } from '../@types/user.dto'
+import { NewUserInputData } from '../../../types/user.dto'
 
 export const users: NewUserInputData[] = [
   {

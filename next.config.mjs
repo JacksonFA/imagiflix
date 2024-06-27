@@ -3,10 +3,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
         hostname: 'github.com',
-        port: '',
-        pathname: '/JacksonFA.png',
+      },
+      {
+        hostname: 'image.tmdb.org',
       },
     ],
   },

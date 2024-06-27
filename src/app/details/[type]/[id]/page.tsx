@@ -4,44 +4,57 @@ import Movie from '@/assets/movies/capa6.png'
 import { PlusCircle, ThumbsUp, Volume2 } from 'lucide-react'
 import { Button } from '@/components/button/Button'
 import { FaPlay } from 'react-icons/fa6'
-import { Close } from '../Close'
+import { Close } from '../../Close'
+import { MovieDetails } from '@/types/movie'
 
 type DetailsProps = {
   params: {
-    movie: string
+    type: 'tv' | 'movie'
+    id: number
   }
 }
 
-export default function Details({ params }: DetailsProps) {
+async function getMovieDetails({ params }: DetailsProps): Promise<MovieDetails> {
+  const response = await fetch(
+    `${process.env.NEXT_API_URL}/tmdb/${params.type}/details/${params.id}`,
+    {
+      cache: 'no-cache',
+    }
+  )
+  return response.json()
+}
+
+export default async function Details({ params }: DetailsProps) {
+  const movieDetails = await getMovieDetails({ params })
   return (
     <main className="flex h-screen w-screen justify-center bg-zinc-950">
       <section className="w-full max-w-xl bg-zinc-800">
-        <div className="relative h-96 w-full">
+        <div className="relative h-80 w-full">
           <div className="absolute z-0 h-full w-full">
             <Image
               alt="movie"
-              src={Movie}
-              placeholder="blur"
+              src={movieDetails.backdrop_path}
               quality={100}
               fill
               className="-z-10"
             />
-            <div className="flex h-80 flex-col justify-between px-4 pt-4 text-zinc-50">
+            <div className="flex h-72 flex-col justify-between px-4 pt-4 text-zinc-50">
               <div className="flex items-center justify-end">
                 <Close />
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Button
-                    icon={<FaPlay size={32} />}
+                    icon={<FaPlay size={24} />}
                     text="Assistir"
                     color="primary"
-                    action={`/player/${params.movie}`}
+                    size="sm"
+                    action={`/player/${params.id}`}
                   />
-                  <PlusCircle size={48} className="cursor-pointer" />
-                  <ThumbsUp size={48} className="cursor-pointer" />
+                  <PlusCircle size={36} className="cursor-pointer" />
+                  <ThumbsUp size={36} className="cursor-pointer" />
                 </div>
-                <Volume2 size={48} className="cursor-pointer" />
+                <Volume2 size={36} className="cursor-pointer" />
               </div>
             </div>
           </div>
@@ -49,7 +62,8 @@ export default function Details({ params }: DetailsProps) {
         <div className="flex justify-between px-4 pt-8 text-zinc-50">
           <div className="flex flex-col gap-2">
             <div className="text-sm font-normal">
-              <span className="font-bold text-green-700">97% relevante</span> 2000 1h 29min HD
+              <span className="font-bold text-green-700">97% relevante</span>{' '}
+              {movieDetails.release_date?.slice(0, 4)} 1h 29min HD
             </div>
             <div className="flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50">
@@ -63,8 +77,7 @@ export default function Details({ params }: DetailsProps) {
               <div
                 className={twMerge(
                   'flex h-10 w-10 flex-col items-center justify-center',
-                  'rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50',
-                  params.movie === 'filme-1' && 'bg-green-800'
+                  'rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50'
                 )}
               >
                 <p>TOP</p>
@@ -72,10 +85,6 @@ export default function Details({ params }: DetailsProps) {
               </div>
               <span className="text-sm font-bold">Top 5 em filmes hoje</span>
             </div>
-            <p className="max-w-64 text-[10px] font-medium">
-              Marlon e shawn wayans contribuem para alfinetar algunsdos maiores campeões de
-              bilheteria de terror adolescente Hollywood, nesta sátira mordaz
-            </p>
           </div>
           <div className="flex max-w-52 flex-col gap-6 text-[10px]/none font-medium">
             <p>
@@ -83,8 +92,8 @@ export default function Details({ params }: DetailsProps) {
               Elizabeth, mais
             </p>
             <p>
-              <span className="text-zinc-500">Gênero:</span> Sátira, filmes de comédia,filmes de
-              terros
+              <span className="text-zinc-500">Gênero:</span>{' '}
+              {movieDetails.genres.map((genre) => `${genre.name}, `)}
             </p>
             <p>
               <span className="text-zinc-500">Cenas e momentos:</span> Apimentados, irreverentes,
@@ -92,9 +101,12 @@ export default function Details({ params }: DetailsProps) {
             </p>
           </div>
         </div>
+        <p className="max-w-96 px-4 pt-4 text-[10px] font-medium text-zinc-50">
+          {movieDetails.overview}
+        </p>
         <div className="p-4">
           <p className="mb-6 text-xl font-black text-zinc-50">
-            <span className="text-zinc-500">Sobre: </span> {params.movie}
+            <span className="text-zinc-500">Sobre: </span> {movieDetails.title}
           </p>
           <div className="flex flex-col gap-2">
             <p className="text-[10px] font-medium text-zinc-50">
@@ -105,27 +117,16 @@ export default function Details({ params }: DetailsProps) {
               Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen
             </p>
             <p className="text-[10px] font-medium text-zinc-50">
-              <span className="text-zinc-500">Roteiro:</span> Keenen Ivory Wayans Keenen Ivory
-              Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans
-              Keenen Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans Keenen Ivory Wayans
-              Keenen Ivory Wayans Keenen Ivory Wayans
+              <span className="text-zinc-500">Roteiro:</span> {movieDetails.overview}
             </p>
             <p className="text-[10px] font-medium text-zinc-50">
-              <span className="text-zinc-500">Gêneros:</span> Sátira, filmes de comédia, filmes de
-              terror, filmes de comédia e de fim de noite.
+              <span className="text-zinc-500">Gêneros:</span>{' '}
+              {movieDetails.genres.map((genre) => `${genre.name}, `)}
             </p>
             <p className="text-[10px] font-medium text-zinc-50">
               <span className="text-zinc-500">Cenas e momentos:</span> Apimentados, Irreverentes,
               Besteirol
             </p>
-            <div className="flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-[10px] font-bold text-zinc-50">
-                A16
-              </div>
-              <p className="text-[10px] font-medium text-zinc-50">
-                violência extrema, conteúdo sexual, drogas não recomendado para menores de 16 anos
-              </p>
-            </div>
           </div>
         </div>
       </section>
