@@ -1,4 +1,4 @@
-name: Remove Preview Deployments
+name: Remove Production Deployments
 
 on:
   workflow_dispatch:
